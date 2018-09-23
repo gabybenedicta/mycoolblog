@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{%block content %}
+<h1>
+    Create New Post
+</h1>
+<form action="{% url 'blog:newpost' %}" id= "newpost" method="post">
+    <!--to check if no title and no description will give error-->
+    {% if err_name %}
+    {{err_name}}<br>
+    {%endif%}
+    {%if err_desc %}
+    {{err_desc}}<br>
+    {%endif%}
+    {%if err_category %}
+    {{err_category}}<br>
+    {%endif%}
+
+    {% csrf_token %}
+    {{form.as_p}}
+    <h2>{{"POST TITLE"}}</h2><br/>
+    <input type="text" name='post_title' value="">
+    <br/>
+    <h2>
+        {{"Post Content"}}
+    </h2>
+    <textarea type="text" rows="5" cols="50" name='post_content' value=""></textarea>
+<select name="category_id" form="newpost">
+    {% for category in all_category %}
+    <option value= "{{category.id}}">{{category.name}}</option>
+    {%endfor%}
+</select>
+    <br/>
+        <input type="submit" value="Post"/>
+
+</form>
+{%endblock%}
+

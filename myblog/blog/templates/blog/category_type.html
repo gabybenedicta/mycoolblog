@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{%block content%}
+<h1> {{category_type}} </h1>
+
+<h2>Posts: </h2>
+
+{% for post in post_in_category %} 
+<div class="ui raised container segment">
+ <ul>  
+        <h2 class ="ui header"><a href="{%url 'blog:onepost' post.id %}">{{post.title}}</a></h2>
+        <small>
+        <a class="user"> 
+                <i> by: {{post.user.username}}</i>        
+        </a> 
+        </small>  
+        <br/>
+        <br/>
+        <p>
+                {{post.content}}
+        </p>
+        <div class="meta">
+                <a class="like">
+                        <i class = "like icon">
+                        </i>
+                        {{post.likes}}
+                </a> &nbsp;&nbsp; <a href="{%url 'blog:newcomment' post.id%}">{{"Comment"}}</a>
+        </div>
+ </ul>  
+</div>
+{%endfor%}
+{%endblock%}

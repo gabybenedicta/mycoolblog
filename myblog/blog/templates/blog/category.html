@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="ui grid">
+        <div class = "three wide column">
+                <a href="{%url 'blog:category'%}"> {{"CATEGORY"}}</a>
+                <br/>
+                <br/>
+                <a href="{%url 'blog:allpost'%}">{{"POST"}}</a>
+                <br>
+                <br/>
+                <a href="{%url 'blog:home'%}">{{"USER"}}</a>
+                
+
+        </div>
+        <div class= "thirteen wide column">
+                <a href= "{%url 'blog:newcategory' %}">{{"CREATE NEW CATEGORY"}}</a>
+
+                <table class="ui celled table">
+                        <thead>
+                          <tr><th>NAME</th>
+                          <th>POST COUNT</th>
+                          <th>CREATED AT</th>
+                          <th> ACTION </th>
+                        </tr></thead>
+                        <tbody>
+                          
+                                {% for category in categories %}
+                                <div> 
+                                <tr>
+                                   <td data-label="NAME"><a href="{%url 'blog:category_type' category.id %}">{{category.name}}</a></td> 
+                                   <td data-label="POST COUNT"><center>{{category.post_set.all.count}}</center> </td>
+                                   <td data-label="CREATED AT">{{category.created_at}} </td>
+                                   <td data-label="ACTION"> <a href= "{%url 'blog:category'%}">{{"EDIT"}}</a> &nbsp;&nbsp; <a href= "{%url 'blog:category' %}">{{"DELETE"}}</a></td>
+                                </tr>
+                                </div>
+                                {%endfor%}
+                          
+                        </tbody>
+                      </table>
+            
+                
+        </div>         
+</div>
+
+{%endblock%}
+
+                         

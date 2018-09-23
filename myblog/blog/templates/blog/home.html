@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+        {% block content %}
+   <div class="ui grid">
+       <div class="three wide column">
+        <a href="{%url 'blog:category'%}">{{"Categories"}}</a>
+            <div>
+                    {%for category in all_category%}
+                    <a href="{%url 'blog:category_type' category.id %}"> <ul>{{category.name}}</ul> </a>
+                    {%endfor%}
+             </div>
+       </div>
+       <div class = "nine wide column">
+        {% for post in all_post %}
+        <ul>
+        <div class="ui raised container segment">
+        <h2 class ="ui header"><a href="{%url 'blog:onepost' post.id %}">{{post.title}}</a></h2>
+                <small>
+                <a class="user"> 
+                        <i> by: {{post.user.username}}</i>        
+                </a> 
+                </small>  
+                <br/>
+                <br/>
+                <p>
+                        {{post.content}}
+                </p>
+                <form action="{% url 'blog:home' %}" id= "home" method="post">
+                <div class="meta">
+                        {% csrf_token %}
+                        <input type = "submit" class="like" value="Like" name={{post.id}} >
+                                <i class = "like icon">
+                                </i>
+                                {{post.likes}}
+                        </a> &nbsp;&nbsp; <a href="{%url 'blog:newcomment' post.id%}">{{"Comment"}}</a>
+                </div>
+                </form>
+        </div>
+        </ul> 
+        {%endfor%}  
+        </div>
+
+       <div class= "four wide column">
+               <div class="ui raised container segment">
+                        <img class="ui small image" src="http://notaris-ppatbadungbali.org/wp-content/uploads/2015/03/empty-profile.png">
+                                <br/>
+                                <center> {{current_user.username}} </center>
+                                <br/>
+               </div> 
+               <a href="{% url 'blog:newpost'%}">{{"Create New Post"}}</a>
+       </div>
+</form>
+   </div>
+        
+        {% endblock content %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"></script>
+
+

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{%block content %}
+<h1>
+    Create New Comment
+</h1>
+<form action="{% url 'blog:newcomment' post.id %}" id= "newcomment" method="post">
+    <!--to check if no title and no description will give error-->
+    {%if err_desc %}
+    {{err_desc}}<br>
+    {%endif%}
+
+    {% csrf_token %}
+    {{form.as_p}}
+    <h2>
+        {{"Comment:"}}
+    </h2>
+    <textarea type="text" rows="5" cols="50" name='post_comment' value=""></textarea>
+    <br/>
+        <input type="submit" value="Post"/>
+
+</form>
+{%endblock%}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> NEW CATEGORY </h1>
+<form action="{% url 'blog:newcategory' %}" method = "post">
+    {% csrf_token %}
+    Category name : <br>
+    <input type ="text" name="category_name" value=""> <br>
+    <br>
+    <input type ="submit" value="Submit">
+</form>
+
+{% endblock %}

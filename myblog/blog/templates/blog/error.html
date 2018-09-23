@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content%}
+<h1>
+        {{"Error Page"}}
+</h1>
+<br/>
+
+{{"Oops, something wrong happened."}}<br/>
+<br/>
+{{"Your username or password is invalid."}}<br/>
+{{"Click"}} <a href="{%url 'blog:home'%}"> {{"here"}}</a>
+{{"to go back to home page."}}
+{%endblock%}

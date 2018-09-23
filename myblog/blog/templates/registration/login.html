@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+{% block content %}
+   <div class="ui grid">
+       <div class="three wide column">
+            <div>
+                    {%for category in all_category%}
+                    <a href="{%url 'blog:category_type' category.id %}"> <ul>{{category.name}}</ul> </a>
+                    {%endfor%}
+             </div>
+       </div>
+       <div class = "nine wide column">
+        {% for post in all_post %}
+        <ul>
+        <div class="ui raised container segment">
+                <h2 class ="ui header">{{post.title}}</h2>
+                <small>
+                <a class="user"> 
+                        <i> by: {{post.user.username}}</i>        
+                </a> 
+                </small>  
+                <br/>
+                <br/>
+                <p>
+                        {{post.content}}
+                </p>
+                <div class="meta">
+                        <a class="like">
+                                <i class = "like icon">
+                                </i>
+                        </a>
+                </div>
+        </div>
+        </ul> 
+        {%endfor%}  
+        </div>
+
+       <div class= "four wide column">
+               <div class="ui raised container segment">
+                        <img class="ui small image" src="http://notaris-ppatbadungbali.org/wp-content/uploads/2015/03/empty-profile.png">
+                        <h2>Login</h2>
+                          <form method="post">
+                              {% csrf_token %}
+                              {{ form.as_p }}
+                              <button type="submit">Login</button>
+                          </form>
+                    {{"Don't have an account? Click"}} <a href="{%url 'blog:signup' %}">{{"here"}}</a>
+                    {{"to sign up."}}
+                        </form>
+               </div> 
+       </div>
+</form>
+       <a href="{% url 'blog:newpost'%}">{{"Create New Post"}}</a>
+   </div>
+        
+        {% endblock content %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"></script>
+
+

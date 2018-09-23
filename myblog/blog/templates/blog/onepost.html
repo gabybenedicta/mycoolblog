@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{%block content%}
+<div>
+    <div class= "ui piled segment"> 
+  <h1 class ="ui header"> {{one_post.title}}</h1>
+  <br/>
+  <a class="user"> 
+  <small>
+    <i>
+      {{one_post.user.username}}
+    </i>
+  </small>
+  </a>
+  <div>
+    <p>
+        {{one_post.content}}
+    </p>
+  </div>
+  <div class="meta">
+      <a class="like">
+              <i class = "like icon">{{one_post.likes}}
+              </i>
+      </a>
+</div>
+</div>
+
+
+  <div>
+    <h2>Comments:</h2>
+  <div class="ui raised segment">
+    <div class="ui feed">
+        <div class="event">
+      {% for comment in comments_in_post %}
+      <div><br/>
+        {%if comment.is_hidden%}
+        <div class="label">
+            <img src="http://lionhallattorneys.com.ng/wp-content/uploads/2015/12/empty-profile.png">
+          </div>
+        <div class="content">
+            <div class="summary">
+        <a class="user">
+          <i>
+             {{comment.user.username}}
+          </i>
+        </a>
+        <p>{{comment.content}}
+        </p>
+        {{"HIDDEN"}}
+        </div>
+        </div>
+        {%else%}
+        <div class="label">
+            <img src="http://lionhallattorneys.com.ng/wp-content/uploads/2015/12/empty-profile.png">
+          </div>
+        <div class="content"></div>
+        <div class="summary">
+            <a class="user">
+              <i>
+                 {{comment.user.username}}
+              </i>
+            </a>
+            <p>{{comment.content}}
+            </p>
+            </div>
+        </div>
+        {% endif %}
+      {%endfor%}
+    </div>
+      </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+</div>
+{%endblock%}
+
+
+
